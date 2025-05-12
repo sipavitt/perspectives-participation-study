@@ -5,22 +5,24 @@ import { startParticipant } from '../api';
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const handleStart = async () => {
-    try {
-      const res = await startParticipant(); // Ask backend to make a new participant
-      localStorage.setItem('participantCode', res.data.participantCode); // Store code in browser
-      navigate('/consent'); // Move to the next page
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+const handleStart = async () => {
+  try {
+    const res = await startParticipant();
+    console.log("Participant code:", res.data.participantCode); // Add this
+    localStorage.setItem('participantCode', res.data.participantCode);
+    navigate('/consent');
+  } catch (err) {
+    console.error("Error starting participant:", err);
+    alert("Something went wrong. Please refresh and try again.");
+  }
+};
+
 
   return (
     <div style={{ padding: '2rem' }}>
       <h1>Perspectives and Participation</h1>
-      <p>Welcome to the study. This website will guide you through a short experience about cybersecurity and digital behaviour. It will take around 10–15 minutes. Please click below to begin.</p>
-      <button onClick={handleStart}>Start</button>
+      <p>This study will guide you through a short interactive experience about cybersecurity. It will take around 10–15 minutes. Click below to begin.</p>
+      <button onClick={handleStart}>Start Study</button>
     </div>
   );
 };

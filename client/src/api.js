@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', // Change to your Linode IP when deployed
+  baseURL: 'http://85.159.208.58:5000/api',
 });
 
 export const startParticipant = () => API.post('/participants/start');
