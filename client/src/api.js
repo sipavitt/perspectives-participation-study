@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://85.159.208.58:5000/api',
+  baseURL: 'https://study.cyberbx.co.uk/api',
 });
 
 export const startParticipant = () => API.post('/participants/start');
