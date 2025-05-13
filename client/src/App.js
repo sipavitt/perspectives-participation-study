@@ -6,6 +6,8 @@ import DemographicsForm from './components/DemographicsForm';
 import InterventionPage from './components/InterventionPage';
 import PostSurvey from './components/PostSurvey';
 import Debrief from './components/Debrief';
+import ThankYou from './components/ThankYou';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/intervention" element={<InterventionPage />} />
         <Route path="/post-survey" element={<PostSurvey />} />
         <Route path="/debrief" element={<Debrief />} />
+        <Route path="/thankyou" element={<ThankYou />} />
       </Routes>
     </Router>
   );

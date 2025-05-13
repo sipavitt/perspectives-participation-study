@@ -63,35 +63,50 @@ exports.saveDemographics = async (req, res) => {
   }
 };
 
-// Assign group with balancing logic
+// Assign group with balancing logic (5 groups, labelled)
 exports.assignGroup = async (req, res) => {
   const { code } = req.body;
+
+  const groupLabels = ['game1', 'game2', 'video1', 'video2', 'video3'];
+
   try {
-    // Count participants per group (1–5)
+    // Count how many participants per group label
     const counts = await Participant.aggregate([
-      { $match: { groupAssignment: { $ne: null } } },
-      { $group: { _id: "$groupAssignment", count: { $sum: 1 } } }
+      { $match: { group: { $ne: null } } },
+      { $group: { _id: "$group", count: { $sum: 1 } } }
     ]);
 
-    const groupCounts = Array(5).fill(0);
+    // Build a lookup of label -> count
+    const groupCounts = {};
+    groupLabels.forEach(label => { groupCounts[label] = 0; });
     counts.forEach(g => {
-      groupCounts[g._id - 1] = g.count;
+      groupCounts[g._id] = g.count;
     });
 
-    const minCount = Math.min(...groupCounts);
-    const group = groupCounts.indexOf(minCount) + 1;
+    // Find the label with the lowest count
+    const group = Object.entries(groupCounts).sort((a, b) => a[1] - b[1])[0][0];
 
+    // Save it to the participant record
     const participant = await Participant.findOneAndUpdate(
       { participantCode: code },
-      { groupAssignment: group },
+      { group },
       { new: true }
     );
 
+    if (!participant) {
+      console.warn(`No participant found with code ${code}`);
+      return res.status(404).json({ message: "Participant not found" });
+    }
+
+
+    console.log(`Assigned ${group} to participant ${code}`);
     res.json({ group });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 // Mark intervention complete
 exports.markInterventionComplete = async (req, res) => {
@@ -110,18 +125,23 @@ exports.markInterventionComplete = async (req, res) => {
 
 // Save post-survey responses
 exports.savePostSurvey = async (req, res) => {
-  const { code, postSurvey } = req.body;
+  const { code, responses } = req.body;
   try {
     const participant = await Participant.findOneAndUpdate(
       { participantCode: code },
-      { postSurvey },
+      { postSurvey: responses },
       { new: true }
     );
-    res.json(participant);
+    console.log(`Saved post-survey for ${code}:`, responses);
+    res.json({ success: true });
   } catch (err) {
+    console.error("Post-survey save error:", err.message);
     res.status(500).json({ message: err.message });
   }
 };
+
+
+
 
 // Handle withdraw
 exports.withdrawParticipant = async (req, res) => {
