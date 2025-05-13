@@ -44,7 +44,7 @@ const PostSurvey = () => {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '700px', margin: '0 auto' }}>
+    <div className="container">
       <h2>Post-Experience Survey</h2>
       {questions.map((q, i) => (
         <div key={i} style={{ marginBottom: '1rem' }}>

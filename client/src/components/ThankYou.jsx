@@ -2,7 +2,7 @@ import React from 'react';
 
 const ThankYou = () => {
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
+    <div className="container">
       <h2>Thank You!</h2>
       <p>Your responses have been recorded.</p>
       <p>We appreciate your time and contribution to this research.</p>

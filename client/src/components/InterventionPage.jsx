@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { assignGroup } from '../api';
-import { markInterventionComplete } from '../api';
-
+import { assignGroup, markInterventionComplete } from '../api';
 
 const InterventionPage = () => {
   const [group, setGroup] = useState(null);
@@ -12,26 +10,29 @@ const InterventionPage = () => {
     const code = localStorage.getItem('participantCode');
     if (!code) return;
 
-    const fetchGroup = async () => {
+    const assign = async () => {
       try {
         const res = await assignGroup({ code });
-        setGroup(res.data.group);
-        console.log("Assigned group:", res.data.group);
+        const assignedGroup = res.data.group;
+        setGroup(assignedGroup);
+
+        await markInterventionComplete({ code });
+        console.log(`Assigned group ${assignedGroup} and marked intervention complete.`);
       } catch (err) {
-        console.error("Error assigning group:", err);
+        console.error("Error during group assignment or completion:", err);
       }
     };
 
-    fetchGroup();
+    assign();
   }, []);
 
   if (!group) return <p>Loading your experience...</p>;
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Intervention: {group}</h2>
+    <div className="container">
+      <h2>Intervention Condition {group}</h2>
 
-      {group === 'game1' && (
+      {group === 1 && (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
           <iframe
             src="https://player.stornaway.io/embed/139314b9"
@@ -44,7 +45,31 @@ const InterventionPage = () => {
         </div>
       )}
 
-      {group === 'game2' && (
+      {group === 2 && (
+        <iframe
+          title="Video 1"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/H_bB0sAqLNg"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      )}
+
+      {group === 3 && (
+        <iframe
+          title="Video 2"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/R6DiFlAXrS0"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      )}
+
+      {group === 4 && (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
           <iframe
             src="https://player.stornaway.io/embed/139314b9"
@@ -57,31 +82,7 @@ const InterventionPage = () => {
         </div>
       )}
 
-      {group === 'video1' && (
-        <iframe
-          title="Video 1"
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/H_bB0sAqLNg"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      )}
-
-      {group === 'video2' && (
-        <iframe
-          title="Video 2"
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/R6DiFlAXrS0"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      )}
-
-      {group === 'video3' && (
+      {group === 5 && (
         <iframe
           title="Video 3"
           width="560"
@@ -94,19 +95,9 @@ const InterventionPage = () => {
       )}
 
       <div style={{ marginTop: '2rem' }}>
-        <button onClick={async () => {
-        const code = localStorage.getItem('participantCode');
-          try {
-          await markInterventionComplete({ code });
-          navigate('/post-survey');
-        } catch (err) {
-          console.error("Error marking intervention complete:", err);
-          alert("Something went wrong saving your progress.");
-        }
-       }}>
-        Continue to Survey
-       </button>
-
+        <button onClick={() => navigate('/post-survey')}>
+          Continue to Survey
+        </button>
       </div>
     </div>
   );

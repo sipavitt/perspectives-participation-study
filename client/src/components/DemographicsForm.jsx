@@ -26,7 +26,7 @@ const DemographicsForm = () => {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
+    <div className="container">
       <h2>Demographics</h2>
 
       <label>Age:

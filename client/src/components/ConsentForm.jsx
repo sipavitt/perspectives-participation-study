@@ -35,7 +35,7 @@ const ConsentForm = () => {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
+    <div className="container">
       <h2>Consent Form</h2>
       <p>Please confirm the following:</p>
       {consentText.map((text, i) => (

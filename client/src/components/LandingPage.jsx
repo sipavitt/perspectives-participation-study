@@ -19,7 +19,7 @@ const handleStart = async () => {
 
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="container">
       <h1>Perspectives and Participation</h1>
       <p>This study will guide you through a short interactive experience about cybersecurity. It will take around 10–15 minutes. Click below to begin.</p>
       <button onClick={handleStart}>Start Study</button>
