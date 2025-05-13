@@ -11,3 +11,5 @@ export const assignGroup = (data) => API.post('/participants/assign-group', data
 export const completeIntervention = (data) => API.post('/participants/complete-intervention', data);
 export const submitPostSurvey = (data) => API.post('/participants/post-survey', data);
 export const withdrawParticipant = (data) => API.post('/participants/withdraw', data);
+export const markInterventionComplete = (data) =>
+  API.post('/participants/complete-intervention', data);

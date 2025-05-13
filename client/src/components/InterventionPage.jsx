@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { assignGroup } from '../api';
+import { markInterventionComplete } from '../api';
+
 
 const InterventionPage = () => {
   const [group, setGroup] = useState(null);
@@ -92,9 +94,19 @@ const InterventionPage = () => {
       )}
 
       <div style={{ marginTop: '2rem' }}>
-        <button onClick={() => navigate('/post-survey')}>
-          Continue to Survey
-        </button>
+        <button onClick={async () => {
+        const code = localStorage.getItem('participantCode');
+          try {
+          await markInterventionComplete({ code });
+          navigate('/post-survey');
+        } catch (err) {
+          console.error("Error marking intervention complete:", err);
+          alert("Something went wrong saving your progress.");
+        }
+       }}>
+        Continue to Survey
+       </button>
+
       </div>
     </div>
   );
