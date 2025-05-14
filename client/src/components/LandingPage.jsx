@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { startParticipant } from '../api';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
-const handleStart = async () => {
-  try {
-    const res = await startParticipant();
-    console.log("Participant code:", res.data.participantCode); // Add this
-    localStorage.setItem('participantCode', res.data.participantCode);
-    navigate('/consent');
-  } catch (err) {
-    console.error("Error starting participant:", err);
-    alert("Something went wrong. Please refresh and try again.");
-  }
-};
+  // Prevent repeat participation from same browser
+  useEffect(() => {
+    if (localStorage.getItem('hasParticipated')) {
+      navigate('/already-participated');
+    }
+  }, [navigate]);
 
+  const handleStart = async () => {
+    try {
+      const res = await startParticipant();
+      console.log("Participant code:", res.data.participantCode);
+
+      localStorage.setItem('participantCode', res.data.participantCode);
+      localStorage.setItem('hasParticipated', 'true'); // Set repeat block flag
+      navigate('/consent');
+    } catch (err) {
+      console.error("Error starting participant:", err);
+      alert("Something went wrong. Please refresh and try again.");
+    }
+  };
 
   return (
     <div className="container">

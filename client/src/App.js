@@ -13,7 +13,7 @@ import AdminDashboard from './components/AdminDashboard';
 import Header from './components/Header';
 import Withdrawn from './components/Withdrawn';
 import InterventionInfo from './components/InterventionInfo';
-
+import AlreadyParticipated from './components/AlreadyParticipated';
 
 function App() {
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
@@ -31,6 +31,7 @@ function App() {
         <Route path="/debrief" element={<Debrief />} />
         <Route path="/thankyou" element={<ThankYou />} />
         <Route path="/withdrawn" element={<Withdrawn />} />
+        <Route path="/already-participated" element={<AlreadyParticipated />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={isAdmin ? <AdminDashboard /> : <Navigate to="/admin-login" />} />
       </Routes>

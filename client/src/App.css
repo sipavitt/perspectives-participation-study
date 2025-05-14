@@ -18,6 +18,13 @@
     width: 100%;
     padding: 4px 0;
     font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .likert-options input[type="radio"] {
+    margin: 0;
   }
 }
 
