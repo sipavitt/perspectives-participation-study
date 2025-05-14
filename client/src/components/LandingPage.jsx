@@ -31,6 +31,17 @@ const LandingPage = () => {
       <h1>Perspectives and Participation</h1>
       <p>This study will guide you through a short interactive experience about cybersecurity. It will take around 10–15 minutes. Click below to begin.</p>
       <button onClick={handleStart}>Start Study</button>
+<p style={{ marginTop: '1rem' }}>
+  <a
+    href="https://github.com/sipavitt/perspectives-participation-study/issues/new?template=bug_report.md"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ fontSize: '0.9rem', color: '#555' }}
+  >
+    Report a Bug
+  </a>
+</p>
+
     </div>
   );
 };
