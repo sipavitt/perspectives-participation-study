@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { assignGroup, markInterventionComplete } from '../api';
+import WithdrawButton from './WithdrawButton';
+
 
 const InterventionPage = () => {
   const [group, setGroup] = useState(null);
@@ -33,7 +35,7 @@ const InterventionPage = () => {
       <h2>Intervention Condition {group}</h2>
 
       {group === 1 && (
-        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+        <div className="responsive-iframe-wrapper">
           <iframe
             src="https://player.stornaway.io/embed/139314b9"
             title="Game 1"
@@ -46,6 +48,7 @@ const InterventionPage = () => {
       )}
 
       {group === 2 && (
+       <div className="responsive-iframe-wrapper">
         <iframe
           title="Video 1"
           width="560"
@@ -55,10 +58,12 @@ const InterventionPage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
+       </div>
       )}
 
       {group === 3 && (
-        <iframe
+       <div className="responsive-iframe-wrapper">
+         <iframe
           title="Video 2"
           width="560"
           height="315"
@@ -67,10 +72,11 @@ const InterventionPage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
+       </div>
       )}
 
       {group === 4 && (
-        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+        <div className="responsive-iframe-wrapper">
           <iframe
             src="https://player.stornaway.io/embed/139314b9"
             title="Game 2"
@@ -83,7 +89,8 @@ const InterventionPage = () => {
       )}
 
       {group === 5 && (
-        <iframe
+        <div className="responsive-iframe-wrapper">
+         <iframe
           title="Video 3"
           width="560"
           height="315"
@@ -92,9 +99,11 @@ const InterventionPage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
+       </div>
       )}
 
-      <div style={{ marginTop: '2rem' }}>
+      <div className="button-row">
+        <WithdrawButton />
         <button onClick={() => navigate('/post-survey')}>
           Continue to Survey
         </button>

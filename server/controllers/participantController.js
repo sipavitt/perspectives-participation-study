@@ -67,45 +67,37 @@ exports.saveDemographics = async (req, res) => {
 exports.assignGroup = async (req, res) => {
   const { code } = req.body;
 
-  const groupLabels = ['game1', 'game2', 'video1', 'video2', 'video3'];
-
   try {
-    // Count how many participants per group label
+    // Count participants per numeric groupAssignment
     const counts = await Participant.aggregate([
-      { $match: { group: { $ne: null } } },
-      { $group: { _id: "$group", count: { $sum: 1 } } }
+      { $match: { groupAssignment: { $ne: null } } },
+      { $group: { _id: "$groupAssignment", count: { $sum: 1 } } }
     ]);
 
-    // Build a lookup of label -> count
-    const groupCounts = {};
-    groupLabels.forEach(label => { groupCounts[label] = 0; });
+    const groupCounts = Array(5).fill(0);
     counts.forEach(g => {
-      groupCounts[g._id] = g.count;
+      const index = g._id - 1; // _id is the group number
+      if (index >= 0 && index < 5) {
+        groupCounts[index] = g.count;
+      }
     });
 
-    // Find the label with the lowest count
-    const group = Object.entries(groupCounts).sort((a, b) => a[1] - b[1])[0][0];
+    const minCount = Math.min(...groupCounts);
+    const group = groupCounts.indexOf(minCount) + 1;
 
-    // Save it to the participant record
     const participant = await Participant.findOneAndUpdate(
       { participantCode: code },
-      { group },
+      { groupAssignment: group },
       { new: true }
     );
 
-    if (!participant) {
-      console.warn(`No participant found with code ${code}`);
-      return res.status(404).json({ message: "Participant not found" });
-    }
-
-
-    console.log(`Assigned ${group} to participant ${code}`);
     res.json({ group });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 
 // Mark intervention complete

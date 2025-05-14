@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { submitDemographics } from '../api';
+import WithdrawButton from './WithdrawButton';
+
 
 const DemographicsForm = () => {
   const navigate = useNavigate();
@@ -19,29 +21,30 @@ const DemographicsForm = () => {
     const code = localStorage.getItem('participantCode');
     try {
       await submitDemographics({ code, demographics: formData });
-      navigate('/intervention');
+      navigate('/intervention-info');
     } catch (err) {
       alert("Error submitting demographics. Please try again.");
     }
   };
 
   return (
-    <div className="container">
+  <div className="container">
+    <div className="question-block">
       <h2>Demographics</h2>
 
-      <label>Age:
+      <label>Age:</label>
         <input
           type="number"
+          id="age"
           name="age"
           value={formData.age}
           onChange={handleChange}
-          style={{ display: 'block', marginBottom: '1rem' }}
         />
-      </label>
 
-      <label>Gender:
+      <label>Gender:</label>
         <select
           name="gender"
+          id="gender"
           value={formData.gender}
           onChange={handleChange}
           style={{ display: 'block', marginBottom: '1rem' }}
@@ -52,11 +55,11 @@ const DemographicsForm = () => {
           <option value="Non-binary">Non-binary</option>
           <option value="Prefer not to say">Prefer not to say</option>
         </select>
-      </label>
 
-      <label>Highest Education Level:
+      <label>Highest Education Level:</label>
         <select
           name="education"
+          id="education"
           value={formData.education}
           onChange={handleChange}
           style={{ display: 'block', marginBottom: '1rem' }}
@@ -67,11 +70,11 @@ const DemographicsForm = () => {
           <option value="Undergraduate degree">Undergraduate degree</option>
           <option value="Postgraduate degree">Postgraduate degree</option>
         </select>
-      </label>
 
-      <label>Current Employment Status:
+      <label>Current Employment Status:</label>
         <select
           name="employment"
+          id="employment"
           value={formData.employment}
           onChange={handleChange}
           style={{ display: 'block', marginBottom: '1rem' }}
@@ -84,10 +87,14 @@ const DemographicsForm = () => {
           <option value="Student">Student</option>
           <option value="Retired">Retired</option>
         </select>
-      </label>
 
-      <button onClick={handleSubmit}>Continue</button>
+      <div className="button-row">
+        <WithdrawButton />
+        <button onClick={handleSubmit}>Continue</button>
+      </div>
+
     </div>
+</div>
   );
 };
 

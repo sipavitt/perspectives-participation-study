@@ -11,6 +11,8 @@ import ThankYou from './components/ThankYou';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 import Header from './components/Header';
+import Withdrawn from './components/Withdrawn';
+import InterventionInfo from './components/InterventionInfo';
 
 
 function App() {
@@ -23,10 +25,12 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/consent" element={<ConsentForm />} />
         <Route path="/demographics" element={<DemographicsForm />} />
+        <Route path="/intervention-info" element={<InterventionInfo />} />
         <Route path="/intervention" element={<InterventionPage />} />
         <Route path="/post-survey" element={<PostSurvey />} />
         <Route path="/debrief" element={<Debrief />} />
         <Route path="/thankyou" element={<ThankYou />} />
+        <Route path="/withdrawn" element={<Withdrawn />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={isAdmin ? <AdminDashboard /> : <Navigate to="/admin-login" />} />
       </Routes>

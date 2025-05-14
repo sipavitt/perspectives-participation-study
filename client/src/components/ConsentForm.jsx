@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { submitConsent } from '../api';
+import WithdrawButton from './WithdrawButton';
+
 
 const ConsentForm = () => {
   const navigate = useNavigate();
@@ -39,18 +41,23 @@ const ConsentForm = () => {
       <h2>Consent Form</h2>
       <p>Please confirm the following:</p>
       {consentText.map((text, i) => (
-        <div key={i} style={{ marginBottom: '1rem' }}>
-          <label>
-            <input
-              type="checkbox"
-              checked={checked[i]}
-              onChange={() => handleChange(i)}
-            />
-            {' '}{text}
-          </label>
-        </div>
-      ))}
-      <button onClick={handleSubmit}>Continue</button>
+  <div key={i} className="question-block">
+    <label style={{ display: 'flex', alignItems: 'center' }}>
+      <input
+        type="checkbox"
+        checked={checked[i]}
+        onChange={() => handleChange(i)}
+      />
+      <span style={{ marginLeft: '0.5rem' }}>{text}</span>
+    </label>
+  </div>
+))}
+
+      <div className="button-row">
+        <WithdrawButton />
+        <button onClick={handleSubmit}>Continue</button>
+      </div>
+
     </div>
   );
 };
