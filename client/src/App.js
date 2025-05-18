@@ -14,6 +14,8 @@ import Header from './components/Header';
 import Withdrawn from './components/Withdrawn';
 import InterventionInfo from './components/InterventionInfo';
 import AlreadyParticipated from './components/AlreadyParticipated';
+import PostSurveyPage2 from './components/PostSurveyPage2';
+
 
 function App() {
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
@@ -30,6 +32,7 @@ function App() {
         <Route path="/post-survey" element={<PostSurvey />} />
         <Route path="/debrief" element={<Debrief />} />
         <Route path="/thankyou" element={<ThankYou />} />
+        <Route path="/post-survey-2" element={<PostSurveyPage2 />} />
         <Route path="/withdrawn" element={<Withdrawn />} />
         <Route path="/already-participated" element={<AlreadyParticipated />} />
         <Route path="/admin-login" element={<AdminLogin />} />

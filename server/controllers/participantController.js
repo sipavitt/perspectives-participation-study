@@ -28,11 +28,11 @@ exports.createParticipant = async (req, res) => {
 
 // Save consent responses
 exports.saveConsent = async (req, res) => {
-  const { code, consent } = req.body;
+  const { code, consentGiven } = req.body;
   try {
     const participant = await Participant.findOneAndUpdate(
       { participantCode: code },
-      { consent },
+      { consentGiven },
       { new: true }
     );
 
@@ -46,6 +46,7 @@ exports.saveConsent = async (req, res) => {
     res.status(500).json({ error: 'Consent saving failed.' });
   }
 };
+
 
 
 // Save demographics

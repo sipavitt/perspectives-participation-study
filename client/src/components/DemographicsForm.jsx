@@ -35,7 +35,7 @@ const DemographicsForm = () => {
     const code = localStorage.getItem('participantCode');
     try {
       await submitDemographics({ code, demographics: form });
-      navigate('/interstitial');
+      navigate('/intervention-info');
     } catch (err) {
       console.error("Submission failed:", err);
       alert("Something went wrong. Please try again.");

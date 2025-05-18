@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ParticipantSchema = new mongoose.Schema({
   participantCode: { type: String, required: true, unique: true },
-  consent: [Boolean],
+  consentGiven: { type: Boolean, default: false },
   demographics: Object,
   group: { type: String, default: null },  // ✅ Add this line
   groupAssignment: { type: Number },
