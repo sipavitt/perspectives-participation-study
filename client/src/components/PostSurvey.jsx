@@ -74,13 +74,9 @@ const PostSurvey = () => {
 
       <h3>Behavioural Intention</h3>
       <div className="survey-section">
-        {[
-          { key: "q4", label: "Likelihood you will verify the identity of people following you into restricted work areas" },
-          { key: "q5", label: "Likelihood you will report strange or unauthorised USB devices" },
-          { key: "q6", label: "Likelihood you will challenge someone acting suspiciously in the workplace" }
-        ].map(({ key, label }) => (
+        {["q4", "q5", "q6"].map((key, index) => (
           <div key={key} className="question-block">
-            <label>{label}</label>
+            <label>{["Likelihood you will verify the identity of people following you into restricted work areas", "Likelihood you will report strange or unauthorised USB devices", "Likelihood you will challenge someone acting suspiciously in the workplace"][index]}</label>
             <input
               type="range"
               min="0"
@@ -97,10 +93,11 @@ const PostSurvey = () => {
 
       <h3>Response Performance Motivation</h3>
       <p><strong>Please indicate your level of agreement with the following statements:</strong></p>
-      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.8rem', gap: '1rem', marginBottom: '0.25rem', marginRight: '1rem' }}>
-        <span>Strongly disagree</span>
-        <span>Strongly agree</span>
+      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', gap: '1rem', marginBottom: '0.25rem', marginLeft: '1rem', marginRight: '1rem' }}>
+        <span style={{ maxWidth: '80px', wordWrap: 'break-word' }}>Strongly disagree</span>
+        <span style={{ maxWidth: '80px', wordWrap: 'break-word' }}>Strongly agree</span>
       </div>
+
       <div className="survey-section">
         {likertItems.map((q, i) => (
           <div key={i} className="likert-question">
