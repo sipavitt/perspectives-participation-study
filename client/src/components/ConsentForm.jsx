@@ -18,6 +18,17 @@ const ConsentForm = () => {
     "I give permission for the data I provide to be deposited in a specialist data centre after it has been anonymised, so it can be used for future research and learning. It will not be used commercially. My consent will be retained digitally, separate from the data itself until my data is destroyed."
   ];
 
+  const sectionHeadings = [
+    "1. Taking part in the study",
+    "1. Taking part in the study",
+    "1. Taking part in the study",
+    "1. Taking part in the study",
+    "2. Use of the information in the study",
+    "2. Use of the information in the study",
+    "2. Use of the information in the study",
+    "3. Future use and reuse of the information by others"
+  ];
+
   const handleChange = (index) => {
     const updated = [...checked];
     updated[index] = !updated[index];
@@ -28,14 +39,14 @@ const ConsentForm = () => {
     if (checked.every(Boolean)) {
       try {
         const code = localStorage.getItem('participantCode');
-        await submitConsent({ code, consentGiven: true });  // single boolean
+        await submitConsent({ code, consentGiven: true });
         navigate('/demographics');
       } catch (err) {
         console.error("Consent submission error:", err);
         alert("Error submitting consent. Please try again.");
       }
     } else {
-      alert("Please agree to all items before continuing.");
+      alert("If you have any questions or concerns about the information on this page, please contact the lead researcher before continuing.\n\nIf you are not happy to agree to any of the consent items, please click the “Withdraw from study” button below.\n\nDo not proceed unless you are fully comfortable taking part.");
     }
   };
 
@@ -45,14 +56,25 @@ const ConsentForm = () => {
       <p>Please tick all boxes to confirm your understanding and agreement:</p>
 
       {consentText.map((text, i) => (
-        <div key={i} className="question-block">
+        <div key={i} className="survey-section">
+          {i === 0 || sectionHeadings[i] !== sectionHeadings[i - 1] ? (
+            <h3>{sectionHeadings[i]}</h3>
+          ) : null}
           <label style={{ display: 'flex', alignItems: 'center' }}>
             <input
               type="checkbox"
               checked={checked[i]}
               onChange={() => handleChange(i)}
             />
-            <span style={{ marginLeft: '0.5rem' }}>{text}</span>
+            <span style={{ marginLeft: '0.5rem' }}>
+              {i === 0 ? (
+                <>
+                  I have read and understood the <a href="/assets/docs/20250518%20-%20Participant%20Information%20Sheet.pdf" target="_blank" rel="noopener noreferrer">participant information sheet</a> dated 18 May 2025.
+                </>
+              ) : (
+                text
+              )}
+            </span>
           </label>
         </div>
       ))}
