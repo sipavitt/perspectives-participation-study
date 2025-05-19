@@ -74,6 +74,10 @@ const PostSurvey = () => {
 
       <h3>Behavioural Intention</h3>
       <div className="survey-section">
+        <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
+          <span>Strongly disagree</span>
+          <span>Strongly agree</span>
+        </div>
         {[
           { key: "q4", label: "Likelihood you will verify the identity of people following you into restricted work areas" },
           { key: "q5", label: "Likelihood you will report strange or unauthorised USB devices" },
