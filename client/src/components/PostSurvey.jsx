@@ -11,7 +11,7 @@ const PostSurvey = () => {
 
   const [responses, setResponses] = useState({
     q1: '', q2: '', q3: '',
-    q4: '', q5: '', q6: '',
+    q4: 5, q5: 5, q6: 5,
     ...Array.from({ length: 16 }, (_, i) => ({ [`q${i + 7}`]: '' })).reduce((a, b) => ({ ...a, ...b }), {})
   });
 
@@ -48,7 +48,10 @@ const PostSurvey = () => {
   ];
 
   const handleSubmit = () => {
-    if (Object.values(responses).some(v => v == null || v === '')) {
+    const requiredKeys = ['q1', 'q2', 'q3', ...Array.from({ length: 16 }, (_, i) => `q${i + 7}`)];
+    const missing = requiredKeys.some(k => responses[k] === '' || responses[k] == null);
+
+    if (missing) {
       alert("Please complete all questions.");
       return;
     }
