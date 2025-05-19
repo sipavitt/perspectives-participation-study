@@ -95,8 +95,8 @@ const PostSurveyPage2 = () => {
       {Object.entries(sections).map(([sectionTitle, items]) => (
         <div key={sectionTitle} className="survey-section">
           <h3>{sectionTitle}</h3>
-          <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.8rem', gap: '1rem', marginBottom: '0.25rem', marginRight: '1rem' }}>
-  <span>Strongly disagree</span>
+          <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', gap: '1rem', marginBottom: '0.25rem', marginLeft: '1rem', marginRight: '1rem' }}>
+  <span style={{ marginLeft: 'auto' }}>Strongly disagree</span>
   <span>Strongly agree</span>
 </div>
           
