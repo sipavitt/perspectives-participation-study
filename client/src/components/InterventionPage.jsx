@@ -105,7 +105,11 @@ const InterventionPage = () => {
 
       <div className="button-row">
         <WithdrawButton />
-        <button onClick={() => navigate('/post-survey')}>
+        {!group && <p>Preparing your survey, please wait…</p>}
+        <button
+          onClick={() => navigate('/post-survey')}
+          disabled={!group}
+        >
           Continue to Survey
         </button>
       </div>
