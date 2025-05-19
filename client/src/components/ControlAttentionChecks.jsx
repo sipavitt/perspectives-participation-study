@@ -7,8 +7,8 @@ const ControlAttentionChecks = ({ values, handleChange }) => (
         To check you’re paying attention, select “Strongly agree” for this question.
       </label>
       <select
-        name="attention1"
-        value={values.attention1 || ''}
+        name="q1"
+        value={values.q1 || ''}
         onChange={e => {
           const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
           handleChange(e.target.name, value);
@@ -30,8 +30,8 @@ const ControlAttentionChecks = ({ values, handleChange }) => (
         What colour is the sky on a clear day?
       </label>
       <select
-        name="attention2"
-        value={values.attention2 || ''}
+        name="q2"
+        value={values.q2 || ''}
         onChange={e => {
           const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
           handleChange(e.target.name, value);
@@ -53,8 +53,8 @@ const ControlAttentionChecks = ({ values, handleChange }) => (
         Which of these numbers is the largest?
       </label>
       <select
-        name="attention3"
-        value={values.attention3 || ''}
+        name="q3"
+        value={values.q3 || ''}
         onChange={e => {
           const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
           handleChange(e.target.name, value);
