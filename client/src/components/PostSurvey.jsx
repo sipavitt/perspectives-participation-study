@@ -20,7 +20,8 @@ const PostSurvey = () => {
   };
 
   const handleSliderChange = (qKey, value) => {
-    setResponses(prev => ({ ...prev, [qKey]: parseInt(value) }));
+    const parsed = value === '' ? '' : parseInt(value, 10);
+    setResponses(prev => ({ ...prev, [qKey]: parsed }));
   };
 
   const handleLikertChange = (index, value) => {
@@ -82,7 +83,8 @@ const PostSurvey = () => {
               type="range"
               min="0"
               max="10"
-              value={responses[key]}
+              step="1"
+              value={responses[key] ?? ''}
               onChange={e => handleSliderChange(key, e.target.value)}
             />
             <div className="slider-labels">
