@@ -100,7 +100,16 @@ const PostSurvey = () => {
             <label>{q}</label>
             <div className="likert-options">
               {[1, 2, 3, 4, 5].map((value, idx) => (
-                <label key={value} style={{ position: 'relative', flex: 1, textAlign: 'center', fontSize: '0.9rem' }}>
+                <label
+                  key={value}
+                  style={{
+                    position: 'relative',
+                    flex: 1,
+                    textAlign: 'center',
+                    fontSize: '0.9rem',
+                    paddingTop: i === 0 ? '1.5em' : '0'
+                  }}
+                >
                   <input
                     type="radio"
                     name={`q${i + 7}`}
@@ -108,12 +117,12 @@ const PostSurvey = () => {
                     checked={responses[`q${i + 7}`] === value}
                     onChange={() => handleLikertChange(i, value)}
                   />
-                  {idx === 0 && (
+                  {i === 0 && idx === 0 && (
                     <span style={{ position: 'absolute', top: '-1.5em', left: 0, width: '100%', fontSize: '0.7rem', whiteSpace: 'normal' }}>
                       Strongly disagree
                     </span>
                   )}
-                  {idx === 4 && (
+                  {i === 0 && idx === 4 && (
                     <span style={{ position: 'absolute', top: '-1.5em', right: 0, width: '100%', fontSize: '0.7rem', whiteSpace: 'normal' }}>
                       Strongly agree
                     </span>
