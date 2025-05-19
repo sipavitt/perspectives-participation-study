@@ -1,27 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createParticipant } from '../api';
-
+import { startParticipant } from '../api';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleStart = async () => {
-  try {
-    const response = await createParticipant();
-    localStorage.setItem('participantCode', response.participantCode);
-    navigate('/consent');
-  } catch (err) {
-    console.error("Error creating participant:", err);
-    alert("There was an issue starting the study. Please try again.");
-  }
-};
+    try {
+      const response = await startParticipant();
+      const { participantCode } = response.data;
+      if (!participantCode) throw new Error('No participant code returned');
+
+      localStorage.setItem('participantCode', participantCode);
+      navigate('/consent');
+    } catch (err) {
+      console.error('Error creating participant:', err);
+      alert('There was an issue starting the study. Please try again.');
+    }
+  };
 
   return (
     <div className="container">
       <h1>Welcome to the Perspectives and Participation Study</h1>
       <hr />
       <br />
+
       <p>
         Thank you for your interest! This short online study explores how different types of training materials affect how people think about cyber-security at work.
       </p>
@@ -63,7 +66,7 @@ const LandingPage = () => {
         <a href="mailto:simon.pavitt@open.ac.uk">simon.pavitt@open.ac.uk</a>
       </p>
 
-      <div className="button-row">
+      <div className="button-row" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
         <a
           href="/assets/docs/20250518%20-%20Participant%20Information%20Sheet.pdf"
           target="_blank"
@@ -79,4 +82,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
