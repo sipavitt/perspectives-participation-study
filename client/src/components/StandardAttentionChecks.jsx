@@ -7,8 +7,8 @@ const StandardAttentionChecks = ({ values, handleChange }) => (
         To check you’re paying attention, select “Strongly disagree” for this question.
       </label>
       <select
-        name="attention1"
-        value={values.attention1 || ''}
+        name="q1"
+        value={values.q1 || ''}
         onChange={e => {
           const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
           handleChange(e.target.name, value);
@@ -30,8 +30,8 @@ const StandardAttentionChecks = ({ values, handleChange }) => (
         What type of cyberattack was described in the intervention?
       </label>
       <select
-        name="attention2"
-        value={values.attention2 || ''}
+        name="q2"
+        value={values.q2 || ''}
         onChange={e => {
           const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
           handleChange(e.target.name, value);
@@ -53,8 +53,8 @@ const StandardAttentionChecks = ({ values, handleChange }) => (
         The attacker in the scenario was portrayed as:
       </label>
       <select
-        name="attention3"
-        value={values.attention3 || ''}
+        name="q3"
+        value={values.q3 || ''}
         onChange={e => {
           const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
           handleChange(e.target.name, value);
