@@ -91,13 +91,9 @@ const PostSurveyPage2 = () => {
     <div className="container">
       <h2>Post-Experience Survey – Page 2 of 2</h2>
 
-      {Object.entries(sections).map(([sectionTitle, items]) => (
+      {Object.entries(sections).map(([sectionTitle, items], sectionIndex) => (
         <div key={sectionTitle} className="survey-section">
           <h3>{sectionTitle}</h3>
-          <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', gap: '1rem', marginBottom: '0.25rem', marginLeft: '1rem', marginRight: '1rem' }}>
-            <span style={{ textAlign: 'left' }}>Strongly disagree</span>
-            <span style={{ textAlign: 'right' }}>Strongly agree</span>
-          </div>
 
           {items.map((q, i) => {
             const qNum = Object.values(sections).flat().findIndex(text => text === q) + 23;
@@ -106,8 +102,17 @@ const PostSurveyPage2 = () => {
               <div key={key} className="likert-question">
                 <label>{q}</label>
                 <div className="likert-options">
-                  {[1, 2, 3, 4, 5].map(value => (
-                    <label key={value}>
+                  {[1, 2, 3, 4, 5].map((value, idx) => (
+                    <label
+                      key={value}
+                      style={{
+                        position: 'relative',
+                        flex: 1,
+                        textAlign: 'center',
+                        fontSize: '0.9rem',
+                        paddingTop: i === 0 ? '1.5em' : '0'
+                      }}
+                    >
                       <input
                         type="radio"
                         name={key}
@@ -115,6 +120,16 @@ const PostSurveyPage2 = () => {
                         checked={responses[key] === value}
                         onChange={() => handleLikertChange(key, value)}
                       />
+                      {i === 0 && idx === 0 && (
+                        <span style={{ position: 'absolute', top: '-1.5em', left: 0, width: '100%', fontSize: '0.7rem', whiteSpace: 'normal' }}>
+                          Strongly disagree
+                        </span>
+                      )}
+                      {i === 0 && idx === 4 && (
+                        <span style={{ position: 'absolute', top: '-1.5em', right: 0, width: '100%', fontSize: '0.7rem', whiteSpace: 'normal' }}>
+                          Strongly agree
+                        </span>
+                      )}
                     </label>
                   ))}
                 </div>
