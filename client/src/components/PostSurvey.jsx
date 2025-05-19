@@ -8,7 +8,7 @@ const PostSurvey = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const group = location.state?.group || parseInt(localStorage.getItem('group'), 10);
-  
+
   const [responses, setResponses] = useState({
     q1: '', q2: '', q3: '',
     q4: '', q5: '', q6: '',
@@ -48,29 +48,26 @@ const PostSurvey = () => {
   ];
 
   const handleSubmit = () => {
-    if (Object.values(responses).some(v => v === '')) {
+    if (Object.values(responses).some(v => v == null || v === '')) {
       alert("Please complete all questions.");
       return;
     }
-
     navigate('/post-survey-2', { state: { responses } });
   };
 
-if (!group) {
-  return <p>Error: Group assignment missing. Please refresh or restart.</p>;
-}
-
+  if (!group) {
+    return <p>Error: Group assignment missing. Please refresh or restart.</p>;
+  }
 
   return (
     <div className="container">
       <h2>Post-Experience Survey – Page 1 of 2</h2>
 
       {group === 5 ? (
-  <ControlAttentionChecks values={responses} handleChange={handleRadioChange} />
-) : (
-  <StandardAttentionChecks values={responses} handleChange={handleRadioChange} />
-)}
-
+        <ControlAttentionChecks values={responses} handleChange={handleRadioChange} />
+      ) : (
+        <StandardAttentionChecks values={responses} handleChange={handleRadioChange} />
+      )}
 
       <h3>Behavioural Intention</h3>
       <div className="survey-section">
@@ -81,8 +78,16 @@ if (!group) {
         ].map(({ key, label }) => (
           <div key={key} className="question-block">
             <label>{label}</label>
-            <input type="range" min="0" max="10" value={responses[key]} onChange={e => handleSliderChange(key, e.target.value)} />
-            <div className="slider-labels"><span>Extremely unlikely</span><span>Extremely likely</span></div>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              value={responses[key]}
+              onChange={e => handleSliderChange(key, e.target.value)}
+            />
+            <div className="slider-labels">
+              <span>Extremely unlikely</span><span>Extremely likely</span>
+            </div>
           </div>
         ))}
       </div>
