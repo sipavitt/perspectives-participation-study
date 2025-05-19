@@ -8,14 +8,11 @@ const DemographicsForm = () => {
   const [form, setForm] = useState({
     age: '',
     preferNotToSay: false,
-    q2: '',
-    q3: '',
-    q4: '',
-    q5: '',
-    q6: '',
-    q7: '',
-    q8: '',
-    q9: ''
+    gender: '',
+    experience: '',
+    expectedTraining: '',
+    priorAttack: '',
+    openText: ''
   });
 
   const handleChange = (e) => {
@@ -27,7 +24,7 @@ const DemographicsForm = () => {
     setForm(prev => ({
       ...prev,
       preferNotToSay: !prev.preferNotToSay,
-      age: !form.preferNotToSay ? '' : form.age // clear age if opting out
+      age: !form.preferNotToSay ? '' : form.age
     }));
   };
 
@@ -45,122 +42,85 @@ const DemographicsForm = () => {
   return (
     <div className="container">
       <h2>Demographics</h2>
+      <div className="survey-section">
+        <label>
+          What is your age?
+          <input
+            type="number"
+            name="age"
+            value={form.age}
+            onChange={handleChange}
+            disabled={form.preferNotToSay}
+          />
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={form.preferNotToSay}
+            onChange={handleCheckbox}
+          />
+          I’d rather not say
+        </label>
+        <hr />
 
-      {/* Age with opt-out */}
-      <label>
-        Age:
-        <input
-          type="number"
-          name="age"
-          value={form.age}
-          onChange={handleChange}
-          disabled={form.preferNotToSay}
-        />
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={form.preferNotToSay}
-          onChange={handleCheckbox}
-        />
-        I'd rather not say
-      </label>
+        <label>
+          What is your gender?
+          <select name="gender" value={form.gender} onChange={handleChange}>
+            <option value="">Select an option</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">I'd rather not say</option>
+          </select>
+        </label>
+        <hr />
 
-      {/* Dropdowns (replace placeholders with real labels/values) */}
-      <label>
-        Question 2:
-        <select name="q2" value={form.q2} onChange={handleChange}>
-          <option value="">Select an option</option>
-          <option value="Option 1">Option 1</option>
-          <option value="Option 2">Option 2</option>
-          <option value="Option 3">Option 3</option>
-          <option value="Option 4">Option 4</option>
-          <option value="Option 5">Option 5</option>
-        </select>
-      </label>
+        <label>
+          My cyber-security experience is…
+          <select name="experience" value={form.experience} onChange={handleChange}>
+            <option value="">Select an option</option>
+            <option value="None">None</option>
+            <option value="Exposed at work as a non-specialist">Exposed to it in the workplace as a non-specialist</option>
+            <option value="Cyber security professional">I am a cyber security professional</option>
+            <option value="Other security professional">I am another kind of security professional</option>
+            <option value="Previously involved">I am no longer involved with cyber but have prior experience</option>
+          </select>
+        </label>
+        <hr />
 
-      <label>
-        Question 3:
-        <select name="q3" value={form.q3} onChange={handleChange}>
-          <option value="">Select an option</option>
-          <option value="Option A">Option A</option>
-          <option value="Option B">Option B</option>
-          <option value="Option C">Option C</option>
-          <option value="Option D">Option D</option>
-          <option value="Option E">Option E</option>
-        </select>
-      </label>
+        <fieldset>
+          <legend>I am expected to complete cyber-security training in my job</legend>
+          <label><input type="radio" name="expectedTraining" value="Yes" onChange={handleChange} /> Yes</label>
+          <label><input type="radio" name="expectedTraining" value="No" onChange={handleChange} /> No</label>
+          <label><input type="radio" name="expectedTraining" value="N/A" onChange={handleChange} /> N/A</label>
+        </fieldset>
+        <hr />
 
-      {/* Radio buttons for Q4 */}
-      <fieldset>
-        <legend>Question 4:</legend>
-        <label><input type="radio" name="q4" value="N/A" onChange={handleChange} /> N/A</label>
-        <label><input type="radio" name="q4" value="Yes" onChange={handleChange} /> Yes</label>
-        <label><input type="radio" name="q4" value="No" onChange={handleChange} /> No</label>
-      </fieldset>
+        <label>
+          I have experience with a cyber-attack
+          <select name="priorAttack" value={form.priorAttack} onChange={handleChange}>
+            <option value="">Select an option</option>
+            <option value="No">No</option>
+            <option value="Personal experience">I have personal experience of cybercrime outside work</option>
+            <option value="Employer attacked">My employer was attacked</option>
+            <option value="Involved in response">I was involved in the response to an attack in my organisation</option>
+            <option value="Prefer not to say">I’d rather not say</option>
+          </select>
+        </label>
+        <hr />
 
-      {/* More dropdowns as placeholders */}
-      <label>
-        Question 5:
-        <select name="q5" value={form.q5} onChange={handleChange}>
-          <option value="">Select</option>
-          <option value="One">One</option>
-          <option value="Two">Two</option>
-          <option value="Three">Three</option>
-          <option value="Four">Four</option>
-          <option value="Five">Five</option>
-        </select>
-      </label>
+        <label>
+          Is there anything else you would like to tell us about your background or experience relevant to this study?
+          <textarea
+            name="openText"
+            value={form.openText}
+            onChange={handleChange}
+            rows={4}
+            placeholder="Enter your response"
+          />
+        </label>
+      </div>
 
-      <label>
-        Question 6:
-        <select name="q6" value={form.q6} onChange={handleChange}>
-          <option value="">Select</option>
-          <option value="Red">Red</option>
-          <option value="Green">Green</option>
-          <option value="Blue">Blue</option>
-          <option value="Yellow">Yellow</option>
-          <option value="Purple">Purple</option>
-        </select>
-      </label>
-
-      <label>
-        Question 7:
-        <select name="q7" value={form.q7} onChange={handleChange}>
-          <option value="">Select</option>
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-          <option value="Bird">Bird</option>
-          <option value="Fish">Fish</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
-
-      <label>
-        Question 8:
-        <select name="q8" value={form.q8} onChange={handleChange}>
-          <option value="">Select</option>
-          <option value="Choice A">Choice A</option>
-          <option value="Choice B">Choice B</option>
-          <option value="Choice C">Choice C</option>
-          <option value="Choice D">Choice D</option>
-          <option value="Choice E">Choice E</option>
-        </select>
-      </label>
-
-      {/* Free text box */}
-      <label>
-        Question 9 (Open text):
-        <textarea
-          name="q9"
-          value={form.q9}
-          onChange={handleChange}
-          rows={4}
-          placeholder="Enter your response"
-        />
-      </label>
-
-      {/* Button row */}
       <div className="button-row">
         <WithdrawButton />
         <button onClick={handleSubmit}>Continue</button>
@@ -170,4 +130,3 @@ const DemographicsForm = () => {
 };
 
 export default DemographicsForm;
-
