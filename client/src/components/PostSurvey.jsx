@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import WithdrawButton from './WithdrawButton';
 import StandardAttentionChecks from './StandardAttentionChecks';
 import ControlAttentionChecks from './ControlAttentionChecks';
+import { useLocation } from 'react-router-dom';
 
-const group = parseInt(localStorage.getItem('group'), 10);
+const location = useLocation();
+const group = location.state?.group;
 
 const PostSurvey = () => {
   const navigate = useNavigate();
