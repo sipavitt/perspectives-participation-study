@@ -94,8 +94,8 @@ const PostSurvey = () => {
       <h3>Response Performance Motivation</h3>
       <p><strong>Please indicate your level of agreement with the following statements:</strong></p>
       <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', gap: '1rem', marginBottom: '0.25rem', marginLeft: '1rem', marginRight: '1rem' }}>
-        <span style={{ maxWidth: '80px', wordWrap: 'break-word' }}>Strongly disagree</span>
-        <span style={{ maxWidth: '80px', wordWrap: 'break-word' }}>Strongly agree</span>
+        <span style={{ textAlign: 'left' }}>Strongly disagree</span>
+        <span style={{ textAlign: 'right' }}>Strongly agree</span>
       </div>
 
       <div className="survey-section">
