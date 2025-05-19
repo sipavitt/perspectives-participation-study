@@ -1,49 +1,73 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { startParticipant } from '../api';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  // Prevent repeat participation from same browser
-  useEffect(() => {
-    if (localStorage.getItem('hasParticipated')) {
-      navigate('/already-participated');
-    }
-  }, [navigate]);
-
-  const handleStart = async () => {
-    try {
-      const res = await startParticipant();
-      console.log("Participant code:", res.data.participantCode);
-
-      localStorage.setItem('participantCode', res.data.participantCode);
-      localStorage.setItem('hasParticipated', 'true'); // Set repeat block flag
-      navigate('/consent');
-    } catch (err) {
-      console.error("Error starting participant:", err);
-      alert("Something went wrong. Please refresh and try again.");
-    }
+  const handleStart = () => {
+    navigate('/consent');
   };
 
   return (
     <div className="container">
-      <h1>Perspectives and Participation</h1>
-      <p>This study will guide you through a short interactive experience about cybersecurity. It will take around 10–15 minutes. Click below to begin.</p>
-      <button onClick={handleStart}>Start Study</button>
-<p style={{ marginTop: '1rem' }}>
-  <a
-    href="https://github.com/sipavitt/perspectives-participation-study/issues/new?template=bug_report.md"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ fontSize: '0.9rem', color: '#555' }}
-  >
-    Report a Bug
-  </a>
-</p>
+      <h1>Welcome to the Perspectives and Participation Study</h1>
+      <hr />
+      <br />
+      <p>
+        Thank you for your interest! This short online study explores how different types of training materials affect how people think about cyber-security at work.
+      </p>
 
+      <h3>What’s involved?</h3>
+      <ul>
+        <li>You’ll watch a short video (about 5 minutes)</li>
+        <li>Then you’ll complete a short questionnaire about your views and motivations</li>
+        <li>The whole study takes <strong>10–15 minutes</strong></li>
+      </ul>
+
+      <h3>Who can take part?</h3>
+      <ul>
+        <li>Aged between 18 and 65</li>
+        <li>Fluent in English</li>
+        <li>No cyber-security knowledge needed</li>
+      </ul>
+
+      <h3>Your data and your rights</h3>
+      <ul>
+        <li>Your responses are <strong>anonymous</strong> — we do not collect names or contact details</li>
+        <li>You can <strong>withdraw at any time</strong> before clicking the final submit button</li>
+        <li>After you submit, your data is anonymised and can’t be withdrawn</li>
+      </ul>
+
+      <h3>Why take part?</h3>
+      <p>
+        Your responses will help researchers better understand how to support secure behaviour in everyday working life.
+        This study has been approved by The Open University’s Human Research Ethics Committee.
+      </p>
+
+      <p>
+        If you’re ready, click below to get started.
+      </p>
+
+      <p>
+        If you have questions, feel free to contact the lead researcher:<br />
+        <strong>Si Pavitt</strong><br />
+        <a href="mailto:simon.pavitt@open.ac.uk">simon.pavitt@open.ac.uk</a>
+      </p>
+
+      <div className="button-row">
+        <a
+          href="/assets/docs/20250518%20-%20Participant%20Information%20Sheet.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="button-link"
+        >
+          View Participant Information Sheet
+        </a>
+        <button onClick={handleStart}>Continue to Consent Form</button>
+      </div>
     </div>
   );
 };
 
 export default LandingPage;
+
