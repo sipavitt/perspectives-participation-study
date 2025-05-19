@@ -50,32 +50,42 @@ const ConsentForm = () => {
     }
   };
 
+  const grouped = consentText.reduce((acc, text, i) => {
+    const heading = sectionHeadings[i];
+    if (!acc[heading]) acc[heading] = [];
+    acc[heading].push({ text, index: i });
+    return acc;
+  }, {});
+
   return (
     <div className="container">
       <h2>Consent Form</h2>
       <p>Please tick all boxes to confirm your understanding and agreement:</p>
 
-      {consentText.map((text, i) => (
-        <div key={i} className="survey-section">
-          {i === 0 || sectionHeadings[i] !== sectionHeadings[i - 1] ? (
-            <h3>{sectionHeadings[i]}</h3>
-          ) : null}
-          <label style={{ display: 'flex', alignItems: 'center' }}>
-            <input
-              type="checkbox"
-              checked={checked[i]}
-              onChange={() => handleChange(i)}
-            />
-            <span style={{ marginLeft: '0.5rem' }}>
-              {i === 0 ? (
-                <>
-                  I have read and understood the <a href="/assets/docs/20250518%20-%20Participant%20Information%20Sheet.pdf" target="_blank" rel="noopener noreferrer">participant information sheet</a> dated 18 May 2025.
-                </>
-              ) : (
-                text
-              )}
-            </span>
-          </label>
+      {Object.entries(grouped).map(([heading, items]) => (
+        <div key={heading} className="survey-section">
+          <h3>{heading}</h3>
+          {items.map(({ text, index }, j) => (
+            <div key={index} style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center' }}>
+                <input
+                  type="checkbox"
+                  checked={checked[index]}
+                  onChange={() => handleChange(index)}
+                />
+                <span style={{ marginLeft: '0.5rem' }}>
+                  {index === 0 ? (
+                    <>
+                      I have read and understood the <a href="/assets/docs/20250518%20-%20Participant%20Information%20Sheet.pdf" target="_blank" rel="noopener noreferrer">participant information sheet</a> dated 18 May 2025.
+                    </>
+                  ) : (
+                    text
+                  )}
+                </span>
+              </label>
+              {j < items.length - 1 && <hr style={{ marginTop: '1rem' }} />}
+            </div>
+          ))}
         </div>
       ))}
 
