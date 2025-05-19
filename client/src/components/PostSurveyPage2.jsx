@@ -95,8 +95,8 @@ const PostSurveyPage2 = () => {
         <div key={sectionTitle} className="survey-section">
           <h3>{sectionTitle}</h3>
           <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', gap: '1rem', marginBottom: '0.25rem', marginLeft: '1rem', marginRight: '1rem' }}>
-            <span style={{ maxWidth: '80px', wordWrap: 'break-word' }}>Strongly disagree</span>
-            <span style={{ maxWidth: '80px', wordWrap: 'break-word' }}>Strongly agree</span>
+            <span style={{ textAlign: 'left' }}>Strongly disagree</span>
+            <span style={{ textAlign: 'right' }}>Strongly agree</span>
           </div>
 
           {items.map((q, i) => {
