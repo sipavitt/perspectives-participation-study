@@ -92,15 +92,13 @@ const PostSurveyPage2 = () => {
       <h2>Post-Experience Survey – Page 2 of 2</h2>
       <p><strong>Please indicate your level of agreement with the following statements:</strong></p>
 
-      <div className="likert-header">
-        <span>Strongly Disagree</span>
-        <span style={{ flex: 1 }}></span>
-        <span>Strongly Agree</span>
-      </div>
-
-      {Object.entries(sections).map(([sectionTitle, items], secIndex) => (
+      {Object.entries(sections).map(([sectionTitle, items]) => (
         <div key={sectionTitle} className="survey-section">
           <h3>{sectionTitle}</h3>
+          <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
+            <span>Strongly disagree</span>
+            <span>Strongly agree</span>
+          </div>
           {items.map((q, i) => {
             const qNum = Object.values(sections).flat().findIndex(text => text === q) + 23;
             const key = `q${qNum}`;
