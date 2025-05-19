@@ -13,3 +13,9 @@ export const submitPostSurvey = (data) => API.post('/participants/post-survey', 
 export const withdrawParticipant = (data) => API.post('/participants/withdraw', data);
 export const markInterventionComplete = (data) =>
   API.post('/participants/complete-intervention', data);
+
+
+export const createParticipant = async () => {
+  const response = await axios.post('/api/participants/create');
+  return response.data;
+};

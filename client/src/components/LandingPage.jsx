@@ -1,12 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createParticipant } from '../api';
+
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const handleStart = () => {
+  const handleStart = async () => {
+  try {
+    const response = await createParticipant();
+    localStorage.setItem('participantCode', response.participantCode);
     navigate('/consent');
-  };
+  } catch (err) {
+    console.error("Error creating participant:", err);
+    alert("There was an issue starting the study. Please try again.");
+  }
+};
 
   return (
     <div className="container">
