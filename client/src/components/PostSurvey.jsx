@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WithdrawButton from './WithdrawButton';
+import StandardAttentionChecks from './StandardAttentionChecks';
+import ControlAttentionChecks from './ControlAttentionChecks';
+
+const group = parseInt(localStorage.getItem('group'), 10);
 
 const PostSurvey = () => {
   const navigate = useNavigate();
@@ -52,36 +56,21 @@ const PostSurvey = () => {
     navigate('/post-survey-2', { state: { responses } });
   };
 
+if (!group) {
+  return <p>Error: Group assignment missing. Please refresh or restart.</p>;
+}
+
+
   return (
     <div className="container">
       <h2>Post-Experience Survey – Page 1 of 2</h2>
 
-      <h3>Quick Recall Questions</h3>
-      <div className="survey-section">
-        {[
-          { label: "What colour was the USB stick?", options: ["White", "Red", "Orange"], key: "q1" },
-          { label: "Was the attacker wearing an ID badge?", options: ["Yes", "No"], key: "q2" },
-          { label: "Did the attacker steal something?", options: ["Yes", "No"], key: "q3" }
-        ].map(({ label, options, key }) => (
-          <div key={key} className="question-block">
-            <label>{label}</label>
-            <div className="radio-group">
-              {options.map((opt, i) => (
-                <label key={i}>
-                  <input
-                    type="radio"
-                    name={key}
-                    value={i + 1}
-                    checked={responses[key] === i + 1}
-                    onChange={e => handleRadioChange(key, e.target.value)}
-                  />
-                  {opt}
-                </label>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      {group === 5 ? (
+  <ControlAttentionChecks values={responses} handleChange={handleRadioChange} />
+) : (
+  <StandardAttentionChecks values={responses} handleChange={handleRadioChange} />
+)}
+
 
       <h3>Behavioural Intention</h3>
       <div className="survey-section">

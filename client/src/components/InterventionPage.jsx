@@ -17,6 +17,7 @@ const InterventionPage = () => {
         const res = await assignGroup({ code });
         const assignedGroup = res.data.group;
         setGroup(assignedGroup);
+        localStorage.setItem('group', assignedGroup);
 
         await markInterventionComplete({ code });
         console.log(`Assigned group ${assignedGroup} and marked intervention complete.`);
