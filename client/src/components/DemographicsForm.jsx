@@ -46,24 +46,26 @@ const DemographicsForm = () => {
     <div className="container">
       <h2>Demographics</h2>
       <div className="survey-section">
-        <label style={{ display: 'block', marginBottom: '1rem' }}>
-          What is your age?<br />
-          <input
-            type="number"
-            name="age"
-            value={form.age}
-            onChange={handleChange}
-            disabled={form.preferNotToSay}
-          />
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={form.preferNotToSay}
-            onChange={handleCheckbox}
-          />
-          I’d rather not say
-        </label>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', gap: '1rem' }}>
+          <label style={{ flexGrow: 1 }}>
+            What is your age?<br />
+            <input
+              type="number"
+              name="age"
+              value={form.age}
+              onChange={handleChange}
+              disabled={form.preferNotToSay}
+            />
+          </label>
+          <label style={{ whiteSpace: 'nowrap' }}>
+            <input
+              type="checkbox"
+              checked={form.preferNotToSay}
+              onChange={handleCheckbox}
+            />
+            I’d rather not say
+          </label>
+        </div>
         <hr />
 
         <label>
@@ -92,7 +94,7 @@ const DemographicsForm = () => {
         <hr />
 
         <fieldset style={{ border: 'none', padding: 0, marginBottom: '1rem' }}>
-          <legend>I am expected to complete cyber-security training in my job</legend>
+          <legend style={{ marginBottom: '0.5rem' }}>I am expected to complete cyber-security training in my job</legend>
           <div style={{ display: 'flex', gap: '1rem' }}>
             <label><input type="radio" name="expectedTraining" value="Yes" onChange={handleChange} /> Yes</label>
             <label><input type="radio" name="expectedTraining" value="No" onChange={handleChange} /> No</label>
