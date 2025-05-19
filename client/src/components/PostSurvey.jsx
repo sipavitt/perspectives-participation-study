@@ -93,18 +93,14 @@ const PostSurvey = () => {
 
       <h3>Response Performance Motivation</h3>
       <p><strong>Please indicate your level of agreement with the following statements:</strong></p>
-      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', gap: '1rem', marginBottom: '0.25rem', marginLeft: '1rem', marginRight: '1rem' }}>
-        <span style={{ textAlign: 'left' }}>Strongly disagree</span>
-        <span style={{ textAlign: 'right' }}>Strongly agree</span>
-      </div>
 
       <div className="survey-section">
         {likertItems.map((q, i) => (
           <div key={i} className="likert-question">
             <label>{q}</label>
             <div className="likert-options">
-              {[1, 2, 3, 4, 5].map(value => (
-                <label key={value}>
+              {[1, 2, 3, 4, 5].map((value, idx) => (
+                <label key={value} style={{ position: 'relative', flex: 1, textAlign: 'center', fontSize: '0.9rem' }}>
                   <input
                     type="radio"
                     name={`q${i + 7}`}
@@ -112,6 +108,16 @@ const PostSurvey = () => {
                     checked={responses[`q${i + 7}`] === value}
                     onChange={() => handleLikertChange(i, value)}
                   />
+                  {idx === 0 && (
+                    <span style={{ position: 'absolute', top: '-1.5em', left: 0, width: '100%', fontSize: '0.7rem', whiteSpace: 'normal' }}>
+                      Strongly disagree
+                    </span>
+                  )}
+                  {idx === 4 && (
+                    <span style={{ position: 'absolute', top: '-1.5em', right: 0, width: '100%', fontSize: '0.7rem', whiteSpace: 'normal' }}>
+                      Strongly agree
+                    </span>
+                  )}
                 </label>
               ))}
             </div>
