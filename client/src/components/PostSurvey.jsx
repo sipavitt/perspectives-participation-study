@@ -64,6 +64,10 @@ const PostSurvey = () => {
 
   return (
     <div className="container">
+      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
+        <span>Strongly disagree</span>
+        <span>Strongly agree</span>
+      </div>
       <h2>Post-Experience Survey – Page 1 of 2</h2>
 
       {group === 5 ? (
