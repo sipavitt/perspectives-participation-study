@@ -72,6 +72,10 @@ const PostSurvey = () => {
         <StandardAttentionChecks values={responses} handleChange={handleRadioChange} />
       )}
 
+<p>
+  You’ve just viewed a short scenario. The following questions are designed to help us understand your reactions and thoughts about what you saw, and how it may influence your views and decisions around cyber-security.
+</p>
+      
       <h3>Behavioural Intention</h3>
       <div className="survey-section">
         {["q4", "q5", "q6"].map((key, index) => (
