@@ -90,7 +90,11 @@ const PostSurveyPage2 = () => {
   return (
     <div className="container">
       <h2>Post-Experience Survey – Page 2 of 2</h2>
-      <p><strong>Please indicate your level of agreement with the following statements:</strong></p>
+      $1
+      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'flex-end', gap: '2rem', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
+        <span>Strongly disagree</span>
+        <span>Strongly agree</span>
+      </div>
 
       {Object.entries(sections).map(([sectionTitle, items]) => (
         <div key={sectionTitle} className="survey-section">
