@@ -4,18 +4,32 @@ const API = axios.create({
   baseURL: 'https://study.cyberbx.co.uk/api',
 });
 
-export const startParticipant = () => API.post('/participants/start');
-export const submitConsent = (data) => API.post('/participants/consent', data);
-export const submitDemographics = (data) => API.post('/participants/demographics', data);
-export const assignGroup = (data) => API.post('/participants/assign-group', data);
-export const completeIntervention = (data) => API.post('/participants/complete-intervention', data);
-export const submitPostSurvey = (data) => API.post('/participants/post-survey', data);
-export const withdrawParticipant = (data) => API.post('/participants/withdraw', data);
-export const markInterventionComplete = (data) =>
-  API.post('/participants/complete-intervention', data);
-
-
+// Generate new participant and return code
 export const createParticipant = async () => {
-  const response = await axios.post('/api/participants/create');
+  const response = await API.post('/participants/create');
+  return response.data;
+};
+
+// Submit consent status
+export const submitConsent = async (data) => {
+  const response = await API.post('/participants/consent', data);
+  return response.data;
+};
+
+// Submit demographics
+export const submitDemographics = async (data) => {
+  const response = await API.post('/participants/demographics', data);
+  return response.data;
+};
+
+// Submit full post-survey (all responses)
+export const submitPostSurvey = async (data) => {
+  const response = await API.post('/participants/postsurvey', data);
+  return response.data;
+};
+
+// Optional: Withdraw participant (if feature enabled)
+export const withdrawParticipant = async (code) => {
+  const response = await API.post('/participants/withdraw', { code });
   return response.data;
 };
