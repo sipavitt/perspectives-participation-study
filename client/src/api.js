@@ -33,3 +33,8 @@ export const withdrawParticipant = async (code) => {
   const response = await API.post('/participants/withdraw', { code });
   return response.data;
 };
+
+export const assignGroup = async (code) => {
+  const response = await API.post('/participants/assign', { code });
+  return response.data;
+};
