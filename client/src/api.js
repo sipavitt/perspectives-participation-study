@@ -10,6 +10,18 @@ export const createParticipant = async () => {
   return response.data;
 };
 
+// Assign to intervention group (if applicable)
+export const assignGroup = async (code) => {
+  const response = await API.post('/participants/assign', { code });
+  return response.data;
+};
+
+// Mark intervention complete
+export const markInterventionComplete = async (code) => {
+  const response = await API.post('/participants/intervention-complete', { code });
+  return response.data;
+};
+
 // Submit consent status
 export const submitConsent = async (data) => {
   const response = await API.post('/participants/consent', data);
@@ -22,19 +34,14 @@ export const submitDemographics = async (data) => {
   return response.data;
 };
 
-// Submit full post-survey (all responses)
+// Submit post-survey responses
 export const submitPostSurvey = async (data) => {
   const response = await API.post('/participants/postsurvey', data);
   return response.data;
 };
 
-// Optional: Withdraw participant (if feature enabled)
+// Withdraw participant (if needed)
 export const withdrawParticipant = async (code) => {
   const response = await API.post('/participants/withdraw', { code });
-  return response.data;
-};
-
-export const assignGroup = async (code) => {
-  const response = await API.post('/participants/assign', { code });
   return response.data;
 };
