@@ -9,7 +9,10 @@ const StandardAttentionChecks = ({ values, handleChange }) => (
       <select
         name="attention1"
         value={values.attention1 || ''}
-        onChange={handleChange}
+        onChange={e => {
+          const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
+          handleChange(e.target.name, value);
+        }}
         className="w-full border rounded p-2"
         required
       >
@@ -29,7 +32,10 @@ const StandardAttentionChecks = ({ values, handleChange }) => (
       <select
         name="attention2"
         value={values.attention2 || ''}
-        onChange={handleChange}
+        onChange={e => {
+          const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
+          handleChange(e.target.name, value);
+        }}
         className="w-full border rounded p-2"
         required
       >
@@ -49,7 +55,10 @@ const StandardAttentionChecks = ({ values, handleChange }) => (
       <select
         name="attention3"
         value={values.attention3 || ''}
-        onChange={handleChange}
+        onChange={e => {
+          const value = e.target.value === '' ? '' : parseInt(e.target.value, 10);
+          handleChange(e.target.name, value);
+        }}
         className="w-full border rounded p-2"
         required
       >
