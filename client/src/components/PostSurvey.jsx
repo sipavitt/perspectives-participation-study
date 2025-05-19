@@ -64,10 +64,6 @@ const PostSurvey = () => {
 
   return (
     <div className="container">
-      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
-        <span>Strongly disagree</span>
-        <span>Strongly agree</span>
-      </div>
       <h2>Post-Experience Survey – Page 1 of 2</h2>
 
       {group === 5 ? (
@@ -78,10 +74,6 @@ const PostSurvey = () => {
 
       <h3>Behavioural Intention</h3>
       <div className="survey-section">
-        <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
-          <span>Strongly disagree</span>
-          <span>Strongly agree</span>
-        </div>
         {[
           { key: "q4", label: "Likelihood you will verify the identity of people following you into restricted work areas" },
           { key: "q5", label: "Likelihood you will report strange or unauthorised USB devices" },
@@ -105,6 +97,10 @@ const PostSurvey = () => {
 
       <h3>Response Performance Motivation</h3>
       <p><strong>Please indicate your level of agreement with the following statements:</strong></p>
+      <div className="likert-scale-labels" style={{ display: 'flex', justifyContent: 'flex-end', fontSize: '0.8rem', gap: '1rem', marginBottom: '0.25rem', marginRight: '1rem' }}>
+        <span>Strongly disagree</span>
+        <span>Strongly agree</span>
+      </div>
       <div className="survey-section">
         {likertItems.map((q, i) => (
           <div key={i} className="likert-question">
