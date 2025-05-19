@@ -12,6 +12,9 @@ const DemographicsForm = () => {
     experience: '',
     expectedTraining: '',
     priorAttack: '',
+    exposureDuration: '',
+    fictionEngagement: '',
+    gamingEngagement: '',
     openText: ''
   });
 
@@ -43,8 +46,8 @@ const DemographicsForm = () => {
     <div className="container">
       <h2>Demographics</h2>
       <div className="survey-section">
-        <label>
-          What is your age?
+        <label style={{ display: 'block', marginBottom: '1rem' }}>
+          What is your age?<br />
           <input
             type="number"
             name="age"
@@ -88,11 +91,13 @@ const DemographicsForm = () => {
         </label>
         <hr />
 
-        <fieldset>
+        <fieldset style={{ border: 'none', padding: 0, marginBottom: '1rem' }}>
           <legend>I am expected to complete cyber-security training in my job</legend>
-          <label><input type="radio" name="expectedTraining" value="Yes" onChange={handleChange} /> Yes</label>
-          <label><input type="radio" name="expectedTraining" value="No" onChange={handleChange} /> No</label>
-          <label><input type="radio" name="expectedTraining" value="N/A" onChange={handleChange} /> N/A</label>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <label><input type="radio" name="expectedTraining" value="Yes" onChange={handleChange} /> Yes</label>
+            <label><input type="radio" name="expectedTraining" value="No" onChange={handleChange} /> No</label>
+            <label><input type="radio" name="expectedTraining" value="N/A" onChange={handleChange} /> N/A</label>
+          </div>
         </fieldset>
         <hr />
 
@@ -105,6 +110,45 @@ const DemographicsForm = () => {
             <option value="Employer attacked">My employer was attacked</option>
             <option value="Involved in response">I was involved in the response to an attack in my organisation</option>
             <option value="Prefer not to say">I’d rather not say</option>
+          </select>
+        </label>
+        <hr />
+
+        <label>
+          I have been exposed to cyber-security for…
+          <select name="exposureDuration" value={form.exposureDuration} onChange={handleChange}>
+            <option value="">Select an option</option>
+            <option value="0 years">0 years</option>
+            <option value="1-2 years">1–2 years</option>
+            <option value="3-5 years">3–5 years</option>
+            <option value="5-10 years">5–10 years</option>
+            <option value="11+ years">11+ years</option>
+          </select>
+        </label>
+        <hr />
+
+        <label>
+          I watch movies, tv, or read fiction books…
+          <select name="fictionEngagement" value={form.fictionEngagement} onChange={handleChange}>
+            <option value="">Select an option</option>
+            <option value="Never">Never</option>
+            <option value="Rarely">Rarely</option>
+            <option value="Sometimes">Sometimes</option>
+            <option value="Often">Often</option>
+            <option value="Enthusiast">Enthusiast</option>
+          </select>
+        </label>
+        <hr />
+
+        <label>
+          I play video games or board games…
+          <select name="gamingEngagement" value={form.gamingEngagement} onChange={handleChange}>
+            <option value="">Select an option</option>
+            <option value="Never">Never</option>
+            <option value="Rarely">Rarely</option>
+            <option value="Sometimes">Sometimes</option>
+            <option value="Often">Often</option>
+            <option value="Avid gamer">Avid gamer</option>
           </select>
         </label>
         <hr />
