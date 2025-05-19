@@ -20,8 +20,7 @@ const PostSurvey = () => {
   };
 
   const handleSliderChange = (qKey, value) => {
-    const parsed = value === '' ? '' : parseInt(value, 10);
-    setResponses(prev => ({ ...prev, [qKey]: parsed }));
+    setResponses(prev => ({ ...prev, [qKey]: Number(value) }));
   };
 
   const handleLikertChange = (index, value) => {
