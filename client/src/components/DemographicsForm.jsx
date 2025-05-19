@@ -17,10 +17,20 @@ const DemographicsForm = () => {
     gamingEngagement: '',
     openText: ''
   });
+  const [ageWarning, setAgeWarning] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
+
+    if (name === 'age') {
+      const num = parseInt(value);
+      if (!isNaN(num) && (num < 18 || num > 65)) {
+        setAgeWarning('This study is only open to participants aged between 18 and 65.');
+      } else {
+        setAgeWarning('');
+      }
+    }
   };
 
   const handleCheckbox = () => {
@@ -29,6 +39,7 @@ const DemographicsForm = () => {
       preferNotToSay: !prev.preferNotToSay,
       age: !form.preferNotToSay ? '' : form.age
     }));
+    setAgeWarning('');
   };
 
   const handleSubmit = async () => {
@@ -66,6 +77,9 @@ const DemographicsForm = () => {
             I’d rather not say
           </label>
         </div>
+        {ageWarning && (
+          <div style={{ marginBottom: '1rem', color: '#990000', fontWeight: 'bold' }}>{ageWarning}</div>
+        )}
         <hr />
 
         <label>
