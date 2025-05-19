@@ -4,44 +4,12 @@ const API = axios.create({
   baseURL: 'https://study.cyberbx.co.uk/api',
 });
 
-// Generate new participant and return code
-export const createParticipant = async () => {
-  const response = await API.post('/participants/create');
-  return response.data;
-};
-
-// Assign to intervention group (if applicable)
-export const assignGroup = async (code) => {
-  const response = await API.post('/participants/assign', { code });
-  return response.data;
-};
-
-// Mark intervention complete
-export const markInterventionComplete = async (code) => {
-  const response = await API.post('/participants/intervention-complete', { code });
-  return response.data;
-};
-
-// Submit consent status
-export const submitConsent = async (data) => {
-  const response = await API.post('/participants/consent', data);
-  return response.data;
-};
-
-// Submit demographics
-export const submitDemographics = async (data) => {
-  const response = await API.post('/participants/demographics', data);
-  return response.data;
-};
-
-// Submit post-survey responses
-export const submitPostSurvey = async (data) => {
-  const response = await API.post('/participants/postsurvey', data);
-  return response.data;
-};
-
-// Withdraw participant (if needed)
-export const withdrawParticipant = async (code) => {
-  const response = await API.post('/participants/withdraw', { code });
-  return response.data;
-};
+export const startParticipant = () => API.post('/participants/start');
+export const submitConsent = (data) => API.post('/participants/consent', data);
+export const submitDemographics = (data) => API.post('/participants/demographics', data);
+export const assignGroup = (data) => API.post('/participants/assign-group', data);
+export const completeIntervention = (data) => API.post('/participants/complete-intervention', data);
+export const submitPostSurvey = (data) => API.post('/participants/post-survey', data);
+export const withdrawParticipant = (data) => API.post('/participants/withdraw', data);
+export const markInterventionComplete = (data) =>
+  API.post('/participants/complete-intervention', data);
